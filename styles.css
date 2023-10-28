@@ -1,71 +1,18 @@
-.container{
+.container {
     background-color: beige;
-    border: solid;
     width: 280px;
     height: 226px;
 }
 
-.row1{
+.row {
     width: 280px;
     height: 50px;
     border: solid;
     background-color: transparent;
-
-}
-.row2 {
-    width: 280px;
-    height: 50px;
-    border: solid;
-    background-color: transparent;
-
-}
-.row3 {
-    width: 280px;
-    height: 50px;
-    border: solid;
-    background-color: transparent;
-
-}
-.row4 {
-    width: 280px;
-    height: 50px;
-    border: solid;
-    background-color: transparent;
-
 }
 
-.row1Cell{
-    width: 50px;
-    height: 50px;
-    
-}
-.column1{
-    height:226px;
-    width:50px;
-    border-right: solid;
-}
-
-.row2Cell{
-    width: 50px;
-    height: 50px;
-}
-.column2 {
-    height: 230px;
-    min-width: 50px;
-    max-width: 100px;
-    border-right: solid;
-}
-
-
-.column3{
-    height: 230px;
-    min-width: 100px;
-    max-width: 150px;
-    border-right: solid;
-}
-.column4{
-    height: 230px;
-    min-width: 150px;
-    max-width: 200px;
+.cell {
+    width: 54.8px;
+    height: 54.8px;
     border-right: solid;
 }
