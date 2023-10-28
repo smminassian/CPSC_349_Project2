@@ -5,7 +5,28 @@
     height: 226px;
 }
 
-.row{
+.row1{
+    width: 280px;
+    height: 50px;
+    border: solid;
+    background-color: transparent;
+
+}
+.row2 {
+    width: 280px;
+    height: 50px;
+    border: solid;
+    background-color: transparent;
+
+}
+.row3 {
+    width: 280px;
+    height: 50px;
+    border: solid;
+    background-color: transparent;
+
+}
+.row4 {
     width: 280px;
     height: 50px;
     border: solid;
@@ -13,8 +34,28 @@
 
 }
 
-.cell{
-    width: 54.8px;
-    height: 54.8px;
-    border: solid;
+.row1Cell{
+    width: 50px;
+    height: 50px;
+    
+}
+.column1{
+    height:226px;
+    width:50px;
+    border-right: solid;
+}
+
+.row2Cell{
+    width: 50px;
+    height: 50px;
+}
+.column1 {
+    height: 226px;
+    width: 50px;
+    border-right: solid;
+}
+.column2{
+    height: 226px;
+    width: 50px;
+    border-right: solid;
 }
