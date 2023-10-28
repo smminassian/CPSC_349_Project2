@@ -1,0 +1,20 @@
+.container{
+    background-color: beige;
+    border: solid;
+    width: 280px;
+    height: 226px;
+}
+
+.row{
+    width: 280px;
+    height: 50px;
+    border: solid;
+    background-color: transparent;
+
+}
+
+.cell{
+    width: 54.8px;
+    height: 54.8px;
+    border: solid;
+}
