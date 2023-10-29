@@ -4,7 +4,7 @@
     grid-template-columns: repeat(4, 1fr);
     width: 280px;
     height: 226px;
-    border: solid;
+    border:solid;
 }
 
 .cell {
