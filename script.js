@@ -1,13 +1,15 @@
 function FillEmptyCells(){
-    const cells = document.querySelectorAll(".cell");
+    const cells = document.querySelectorAll("cellText");
     for (const cell of cells ){
-        cell.innerHTML = (Math.ceil(Math.random() * 2) + 1);
-        if(cell.innerHTML == 1){
+        if(cell.innerHTML == ""){
+            (cell.innerHTML =`<span>${((Math.ceil(Math.random() * 2) + 1))}</span>`) || (cell.innerHTML = `<span>${(Math.ceil(Math.random() * 4)+ 3)}</span>`);
+        }
+        else if((cell.innerHTML == 1) || (cell.innerHTML == 3)){
             const AddDecimal = cell.innerHTML + 0.1;
             const roundUP = ceil(AddDecimal);
-            return roundUP;
-            
+            cell.innerHTML = `<span>${roundUP}</span>`
         }
+        
         
 
     }
