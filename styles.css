@@ -10,3 +10,12 @@
 .cell { /*while columns are getting added, rows are getting added and cells are getting added at 25% of 250. So its 1/4 of 250 which is 70 so width is 70*/
     border: solid; 
 }
+
+.tinyBox{
+    width:75px;
+    height: 50px;
+    border: solid;
+    position: relative;
+    left: 150px;
+    background-color: beige;
+}
