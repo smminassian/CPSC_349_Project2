@@ -1,12 +1,12 @@
 .container {
-    display: grid;
+    display: grid; /*declares that I am using grid*/
     background-color: beige;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); /*adds columns and orders them based on 25% of containers width. In other words its 1/4 */
     width: 280px;
     height: 226px;
     border:solid;
 }
 
-.cell {
-    border: solid;
+.cell { /*while columns are getting added, rows are getting added and cells are getting added at 25% of 250. So its 1/4 of 250 which is 70 so width is 70*/
+    border: solid; 
 }
