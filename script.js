@@ -280,11 +280,14 @@ function addRandomNumber() {
     const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
     let x = randomCell.attributes['data-x'].value;
     let y = randomCell.attributes['data-y'].value;
+
     if (randomCell) {
+        //auto generates 4 on moves that are multiples of 10
         if (count < 2 || count == 10 || count == 20 || count == 30 || count == 40 || count == 50 || count == 60){
             randomCell.textContent = '4';
             gameBoard[y][x] = 4;
         }
+        //for every other move it autogenerates 2
         else{
             randomCell.textContent = '2';
             gameBoard[y][x] = 2;
