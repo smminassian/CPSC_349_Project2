@@ -9,31 +9,44 @@
     <title>2048</title>
 </head>
 <body>
-    <div class = "tinyBox">Score: <span id = "score" >0</span></div>
-    <div class = "tinyBox">Best: <span id = "bestScore">0</span></div>
-    <h1>2048</h1>
     <br>
-    <div class = "container">
-        
-            <div class = "cell"><span class = "cellText"></span></div>      <!--Create 16 cells, im basically creating a 4x4 square matrix -->
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-        
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></sp!an></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
+    <div class="main-container">
+        <div class="game-info">
+            <h1>2048</h1>
+            <div class="game-scores">
+                <div class="tinyBox">SCORE<div class="score">0</div></div>
+                <div class="tinyBox">BEST<div class="high-score">0</div></div>
+            </div>
+        </div>
 
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>
-            <div class = "cell"><span class = "cellText"></span></div>  
+        <div class="game-board-container">
+            
+                <div class="cell" data-x="0" data-y="0"></div>      <!--Create 16 cells, im basically creating a 4x4 square matrix -->
+                <div class="cell" data-x="1" data-y="0"></div>
+                <div class="cell" data-x="2" data-y="0"></div>
+                <div class="cell" data-x="3" data-y="0"></div>
+            
+                <div class="cell" data-x="0" data-y="1"></div>
+                <div class="cell" data-x="1" data-y="1"></div>
+                <div class="cell" data-x="2" data-y="1"></div>
+                <div class="cell" data-x="3" data-y="1"></div>
+                
+                <div class="cell" data-x="0" data-y="2"></div>
+                <div class="cell" data-x="1" data-y="2"></div>
+                <div class="cell" data-x="2" data-y="2"></div>
+                <div class="cell" data-x="3" data-y="2"></div>
+    
+                <div class="cell" data-x="0" data-y="3"></div>
+                <div class="cell" data-x="1" data-y="3"></div>
+                <div class="cell" data-x="2" data-y="3"></div>
+                <div class="cell" data-x="3" data-y="3"></div>  
+        </div>
+
+        <div class="new-game-btn" onclick="startNewGame(event)">New Game</div>
+    </div>
+    <div class="game-lost hidden">
+        <div class="game-lost-text">Game Over</div>
+        <div class="try-again-btn" onclick="startNewGame(event)">Try Again</div>
     </div>
     <!--Work on animations tomorrow-->
      <script src="script.js"></script>
