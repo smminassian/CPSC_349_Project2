@@ -100,8 +100,8 @@ function move(direction) {
     }
     if (moved) {
         count++;
-        addRandomNumber();
         updateCells();
+        addRandomNumber();        
     }
 }
 
@@ -146,7 +146,7 @@ function addRandomNumber() {
     let x = randomCell.attributes['data-x'].value;
     let y = randomCell.attributes['data-y'].value;
     if (randomCell) {
-        if (count < 2) {
+        if (count < 2 || count == 10 || count == 20 || count == 30 || count == 40 || count == 50 || count == 60){
             randomCell.textContent = '4';
             gameBoard[y][x] = 4;
         }
@@ -158,3 +158,4 @@ function addRandomNumber() {
     console.log(gameBoard);
 
 }
+
