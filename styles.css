@@ -2,19 +2,42 @@ body{
     font-family: sans-serif;
 }
 
-.container {
+.main-container{
+    color: #766d65;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-info{
+    color: #766d65;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.game-scores{
+    display: flex;
+    flex-direction: row;
+}
+
+.game-board-container {
     font-family: sans-serif;
     display: grid; /*declares that I am using grid*/
-    background-color: black;
+    background-color: #bbac9f;
     grid-template-columns: repeat(4, 1fr); /*adds columns and orders them based on 25% of containers width. In other words its 1/4 */
     width: 285px;
     height: 285px;
-    border:solid;
+    border: 5px solid #bbac9f;
     border-radius: 10px;
 }
 
 .cell { /*while columns are getting added, rows are getting added and cells are getting added at 25% of 250. So its 1/4 of 250 which is 70 so width is 70*/
-    border: solid; 
+    border: 2px solid #bbac9f; 
+    color: #766d65;
     display: flex;
     font-size: 25px;
     font-weight: bold;
@@ -31,10 +54,14 @@ body{
 }
 
 .tinyBox{
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width:75px;
     height: 50px;
     border: solid;
-    position: relative;
     left: 150px;
     background-color: beige;
+    border-radius: 10px;
 }
