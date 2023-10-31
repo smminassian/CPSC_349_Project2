@@ -284,13 +284,12 @@ function addRandomNumber() {
     let y = randomCell.attributes['data-y'].value;
 
     if (randomCell) {
-        //Investigate this tomorrow. Dont want to have to hardcode this shit
         //auto generates 4 on moves that are multiples of 10
         if (count < 2 || count % 10 == 0){
             randomCell.textContent = '4';
             gameBoard[y][x] = 4;
         }
-        //for every other move it autogenerates 2
+        //for every other move that is not a multiple of 10, it genererates 2.
         else{
             randomCell.textContent = '2';
             gameBoard[y][x] = 2;
