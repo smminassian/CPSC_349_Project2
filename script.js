@@ -286,7 +286,7 @@ function addRandomNumber() {
     if (randomCell) {
         //Investigate this tomorrow. Dont want to have to hardcode this shit
         //auto generates 4 on moves that are multiples of 10
-        if (count < 2 || count == 10 || count == 20 || count == 30 || count == 40 || count == 50 || count == 60){
+        if (count < 2 || count % 10 == 0){
             randomCell.textContent = '4';
             gameBoard[y][x] = 4;
         }
