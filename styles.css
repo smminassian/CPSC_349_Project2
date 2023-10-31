@@ -1,14 +1,33 @@
+body{
+    font-family: sans-serif;
+}
+
 .container {
+    font-family: sans-serif;
     display: grid; /*declares that I am using grid*/
-    background-color: beige;
+    background-color: black;
     grid-template-columns: repeat(4, 1fr); /*adds columns and orders them based on 25% of containers width. In other words its 1/4 */
-    width: 280px;
-    height: 226px;
+    width: 285px;
+    height: 285px;
     border:solid;
+    border-radius: 10px;
 }
 
 .cell { /*while columns are getting added, rows are getting added and cells are getting added at 25% of 250. So its 1/4 of 250 which is 70 so width is 70*/
     border: solid; 
+    display: flex;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: sans-serif;
+    min-height: 70px;
+    min-width: 70px;
+    max-width: 70px;
+    max-height: 70px;
+    background-color: beige;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .tinyBox{
