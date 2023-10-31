@@ -100,6 +100,7 @@ function move(direction) {
     if(moved) {
         addRandomNumber();
         updateCells();
+        updateCellStyles();
     }
 }
 
@@ -113,8 +114,58 @@ function updateCells(){
     }
 }
 
+function updateCellStyles() {
+    const cells = document.querySelectorAll('.cell');
+
+    cells.forEach(cell => {
+        const value = cell.textContent;
+
+        switch (value) {
+            case '2':
+                cell.style.backgroundColor = 'rgb(238, 228, 218)';
+                break;
+            case '4':
+                cell.style.backgroundColor = 'rgb(237, 224, 200)';
+                break;
+            case '8':
+                cell.style.backgroundColor = 'rgb(242, 177, 121)';
+                break;
+            case '16':
+                cell.style.backgroundColor = 'rgb(245, 149, 99)';
+                break;
+            case '32':
+                cell.style.backgroundColor = 'rgb(246, 124, 95)';
+                break;
+            case '64':
+                cell.style.backgroundColor = 'rgb(246, 94, 59)';
+                break;
+            case '128':
+                cell.style.backgroundColor = 'rgb(237, 207, 114)';
+                break;
+            case '256':
+                cell.style.backgroundColor = 'rgb(237, 204, 97)';
+                break;
+            case '512':
+                cell.style.backgroundColor = 'rgb(237, 200, 80)';
+                break;
+            case '1024':
+                cell.style.backgroundColor = 'rgb(237, 197, 63)';
+                break;
+            case '2048':
+                cell.style.backgroundColor = 'rgb(237, 194, 46)';
+                break;
+
+            default:
+                cell.style.backgroundColor = 'rgb(204, 192, 179)'; // Default color for empty cells
+                break;
+        }
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     addRandomNumber();
+    updateCellStyles();
 
     document.addEventListener('keydown', (e) => {
         let direction = null;
