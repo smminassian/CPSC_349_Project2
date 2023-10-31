@@ -1,5 +1,6 @@
 
 // game set up
+let count = 0;
 let score = 0;
 let highScore = 0;
 let gameBoard = [
@@ -107,6 +108,7 @@ function move(direction) {
     // if move is possible
     if(moved) {
         // update the score and state of the game, then add a random number
+        count++;
         updateScore();
         updateCells();
         addRandomNumber();
