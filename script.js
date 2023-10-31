@@ -276,13 +276,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function addRandomNumber() {
-    // add random number to board
     const emptyCells = [...document.querySelectorAll('.cell')].filter(cell => !cell.textContent.trim());
     const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-    if(randomCell){
-        let x = randomCell.attributes['data-x'].value;
-        let y = randomCell.attributes['data-y'].value;
-        gameBoard[y][x] = 2;
-        randomCell.textContent = '2';
-    } 
+    let x = randomCell.attributes['data-x'].value;
+    let y = randomCell.attributes['data-y'].value;
+    if (randomCell) {
+        if (count < 2 || count == 10 || count == 20 || count == 30 || count == 40 || count == 50 || count == 60){
+            randomCell.textContent = '4';
+            gameBoard[y][x] = 4;
+        }
+        else{
+            randomCell.textContent = '2';
+            gameBoard[y][x] = 2;
+        }
+    }
+    console.log(gameBoard);
+
 }
+
