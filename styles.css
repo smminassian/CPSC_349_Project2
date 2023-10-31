@@ -39,7 +39,7 @@ h1{
     border-radius: 10px;
 }
 
-.cell { /*while columns are getting added, rows are getting added and cells are getting added at 25% of 250. So its 1/4 of 250 which is 90 so width is 70*/
+.cell { /*while columns are getting added, rows are getting added and cells are getting added at 25% of 360. So its 1/4 of 360 which is 90 so width is 90*/
     border: 3px solid #bbac9f; 
     color: #766d65;
     display: flex;
