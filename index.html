@@ -13,6 +13,8 @@
     <div class="main-container">
         <div class="game-info">
             <h1>2048</h1>
+            <button onclick="changeView()">Don't know how to play, click me</button>
+            <br>
             <div class="game-scores">
                 <div class="tinyBox">SCORE<div class="score">0</div></div>
                 <div class="tinyBox">BEST<div class="high-score">0</div></div>
@@ -40,9 +42,26 @@
                 <div class="cell" data-x="1" data-y="3"></div>
                 <div class="cell" data-x="2" data-y="3"></div>
                 <div class="cell" data-x="3" data-y="3"></div>  
+
+                <script> //change view code
+                function changeView(){
+                     const view = document.getElementById("howToPlay");
+                     view.scrollIntoView({behavior: "smooth"});
+                }
+
+
+                </script>
         </div>
 
         <div class="new-game-btn" onclick="startNewGame(event)">New Game</div>
+    </div>
+    <br>
+    <br>
+    <br> 
+    <br>
+    <div class = "play" id = "howToPlay">
+        <strong>How to play: </strong><p>Use your arrow keys and join the tiles to make new numbers.</p>
+        <p>GET TO 2048!</p>
     </div>
     <div class="game-lost hidden">
         <div class="game-lost-text">Game Over</div>
