@@ -10,6 +10,57 @@ let gameBoard = [
     [null, null, null, null],
 ];
 
+// State Management --------------------------------------------------------------------------------
+if(!localStorage.getItem('gameBoard')) {
+    saveGameState();
+} else {
+    gameBoard = JSON.parse(localStorage.getItem('gameBoard'));
+    score = parseInt(localStorage.getItem('score'));
+    highScore = parseInt(localStorage.getItem('highScore'));
+    updateScore();
+    updateCells();
+    updateCellStyles();
+
+}
+
+
+function saveGameState() {
+    localStorage.setItem('gameBoard', JSON.stringify(gameBoard));
+    localStorage.setItem('score', score);
+    localStorage.setItem('highScore', highScore);
+}
+// -----------------------------------------------------------------------------------------------
+
+
+// Event Listeners -------------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    // add initial random number
+    addRandomNumber();
+    updateCellStyles();
+
+    // event listener for keys
+    document.addEventListener('keydown', (e) => {
+        let direction = null;
+        switch(e.key) {
+            case "ArrowLeft":
+                direction = "left";
+                break;
+            case "ArrowUp":
+                direction = "up";
+                break;
+            case "ArrowRight":
+                direction = "right";
+                break;
+            case "ArrowDown":
+                direction = "down";
+                break;
+        }
+        move(direction);
+    });
+});
+// -----------------------------------------------------------------------------------------------
+
+// Game Logic -------------------------------------------------------------------------------------
 function move(direction) {
     let moved = false;
     
@@ -28,10 +79,13 @@ function move(direction) {
                             gameBoard[y][x] = null;
                             moved = true;
                             score += gameBoard[y][nextX];
+                            moveCellElement(y, x, y, nextX);
+                            applyMergeEffect(y, nextX);
                         } else if(nextX + 1 !== x) {
                             gameBoard[y][nextX + 1] = gameBoard[y][x];
                             gameBoard[y][x] = null;
                             moved = true;
+                            moveCellElement(y, x, y, nextX + 1);
                         }
                     }
                 }
@@ -50,10 +104,13 @@ function move(direction) {
                             gameBoard[y][x] = null;
                             moved = true;
                             score += gameBoard[nextY][x];
+                            moveCellElement(y, x, nextY, x);
+                            applyMergeEffect(nextY, x);
                         } else if(nextY + 1 !== y) {
                             gameBoard[nextY + 1][x] = gameBoard[y][x];
                             gameBoard[y][x] = null;
                             moved = true;
+                            moveCellElement(y, x, nextY + 1, x);
                         }
                     }
                 }
@@ -72,10 +129,13 @@ function move(direction) {
                             gameBoard[y][x] = null;
                             moved = true;
                             score += gameBoard[y][nextX];
+                            moveCellElement(y, x, y, nextX);
+                            applyMergeEffect(y, nextX);
                         } else if(nextX - 1 !== x) {
                             gameBoard[y][nextX - 1] = gameBoard[y][x];
                             gameBoard[y][x] = null;
                             moved = true;
+                            moveCellElement(y, x, y, nextX - 1);
                         }
                     }
                 }
@@ -94,10 +154,13 @@ function move(direction) {
                             gameBoard[y][x] = null;
                             moved = true;
                             score += gameBoard[nextY][x];
+                            moveCellElement(y, x, nextY, x);
+                            applyMergeEffect(nextY, x);
                         } else if(nextY - 1 !== y) {
                             gameBoard[nextY - 1][x] = gameBoard[y][x];
                             gameBoard[y][x] = null;
                             moved = true;
+                            moveCellElement(y, x, nextY - 1, x);
                         }
                     }
                 }
@@ -112,6 +175,15 @@ function move(direction) {
         updateScore();
         updateCells();
         addRandomNumber();
+        saveGameState();
+
+        setTimeout(() => {
+            for (let y = 0; y < gameBoard.length; y++) {
+                for (let x = 0; x < gameBoard[y].length; x++) {
+                    resetCellElement(y, x);
+                }
+            }
+        }, 210);
     }
     // logGame(); -- for debugging
     updateCellStyles();
@@ -134,6 +206,8 @@ function updateScore() {
         const highScoreElement = document.querySelector('.high-score');
         highScoreElement.textContent = highScore;
     }
+    const highScoreElement = document.querySelector('.high-score');
+    highScoreElement.textContent = highScore;
 }
 
 function updateCells(){
@@ -146,6 +220,75 @@ function updateCells(){
         }
     }
 }
+
+function startNewGame(event){
+    // set a new game
+    gameBoard = [
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null],
+    ];
+    score = 0;
+    updateScore();
+    updateCells();
+    addRandomNumber();   
+    updateCellStyles();
+
+    // if try again button was pushed hide the message
+    if(event.target.classList.value === "try-again-btn"){
+        const lostMessage = document.querySelector('.game-lost');
+        lostMessage.classList.add('hidden');
+    }
+}
+
+function checkGameLost(){
+    // check if board is full
+    const hasNullValue = gameBoard.some(row => row.some(cell => cell === null));
+    if(hasNullValue) return false;
+    
+    // if board is full check if any possible moves are left
+    for(y = 0; y < gameBoard.length; y++){
+        for(x = 0; x < gameBoard[y].length; x++){
+            const currValue = gameBoard[y][x];
+            // check if we have a possible move
+            if(x + 1 < gameBoard.length && currValue === gameBoard[y][x + 1]) return false;
+            if(y + 1 < gameBoard.length && currValue === gameBoard[y + 1][x]) return false;
+        }
+    }
+    return true;
+}
+
+function logGame(){
+    // for debugging we log the board
+    const copiedBoard = JSON.parse(JSON.stringify(gameBoard));
+    console.log(copiedBoard);
+}
+
+function addRandomNumber() {
+    const emptyCells = [...document.querySelectorAll('.cell')].filter(cell => !cell.textContent.trim());
+    const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+
+    let x = randomCell.attributes['data-x'].value; //column of 2d array
+    let y = randomCell.attributes['data-y'].value; //row of 2d array
+
+    if (randomCell) {
+        //auto generates 4 on moves that are multiples of 10
+        if (count % 10 === 0 && count !== 0){
+            randomCell.textContent = '4';
+            gameBoard[y][x] = 4;
+        }
+        //for every other move that is not a multiple of 10, it genererates 2.
+        else{
+            randomCell.textContent = '2';
+            gameBoard[y][x] = 2;
+        }
+    }
+    console.log(gameBoard);
+}
+// -----------------------------------------------------------------------------------------------
+
+// Animations and styling --------------------------------------------------------------------------------------------
 
 function updateCellStyles() {
     // update colors and styling
@@ -205,98 +348,31 @@ function updateCellStyles() {
     });
 }
 
-function startNewGame(event){
-    // set a new game
-    gameBoard = [
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null],
-    ];
-    score = 0;
-    updateScore();
-    updateCells();
-    addRandomNumber();   
-    updateCellStyles();
-
-    // if try again button was pushed hide the message
-    if(event.target.classList.value === "try-again-btn"){
-        const lostMessage = document.querySelector('.game-lost');
-        lostMessage.classList.add('hidden');
+function resetCellElement(y, x) {
+    const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+    if (cell) {
+        cell.style.transform = '';
     }
 }
 
-function checkGameLost(){
-    // check if board is full
-    const hasNullValue = gameBoard.some(row => row.some(cell => cell === null));
-    if(hasNullValue) return false;
-    
-    // if board is full check if any possible moves are left
-    for(y = 0; y < gameBoard.length; y++){
-        for(x = 0; x < gameBoard[y].length; x++){
-            const currValue = gameBoard[y][x];
-            // check if we have a possible move
-            if(x + 1 < gameBoard.length && currValue === gameBoard[y][x + 1]) return false;
-            if(y + 1 < gameBoard.length && currValue === gameBoard[y + 1][x]) return false;
-        }
+function moveCellElement(oldY, oldX, newY, newX) {
+    const cell = document.querySelector(`.cell[data-x="${oldX}"][data-y="${oldY}"]`);
+    const targetCell = document.querySelector(`.cell[data-x="${newX}"][data-y="${newY}"]`);
+
+    if (cell && cell.textContent.trim() !== "") {  // This checks for non-empty cells
+        let translateX = (newX - oldX) * 90; 
+        let translateY = (newY - oldY) * 90; 
+        cell.style.transform = `translate(${translateX}px, ${translateY}px)`;
     }
-    return true;
 }
 
-function logGame(){
-    // for debugging we log the board
-    const copiedBoard = JSON.parse(JSON.stringify(gameBoard));
-    console.log(copiedBoard);
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // add initial random number
-    addRandomNumber();
-    updateCellStyles();
-
-    // event listener for keys
-    document.addEventListener('keydown', (e) => {
-        let direction = null;
-        switch(e.key) {
-            case "ArrowLeft":
-                direction = "left";
-                break;
-            case "ArrowUp":
-                direction = "up";
-                break;
-            case "ArrowRight":
-                direction = "right";
-                break;
-            case "ArrowDown":
-                direction = "down";
-                break;
-        }
-        move(direction);
-    });
-});
-
-
-function addRandomNumber() {
-    const emptyCells = [...document.querySelectorAll('.cell')].filter(cell => !cell.textContent.trim());
-    const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-
-    let x = randomCell.attributes['data-x'].value; //column of 2d array
-    let y = randomCell.attributes['data-y'].value; //row of 2d array
-
-    if (randomCell) {
-        //auto generates 4 on moves that are multiples of 10
-        if (count % 10 === 0 && count !== 0){
-            randomCell.textContent = '4';
-            gameBoard[y][x] = 4;
-        }
-        //for every other move that is not a multiple of 10, it genererates 2.
-        else{
-            randomCell.textContent = '2';
-            gameBoard[y][x] = 2;
-        }
+function applyMergeEffect(y, x) {
+    const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+    if (cell) {
+        cell.classList.add('merge-pop');
+        setTimeout(() => {
+            cell.classList.remove('merge-pop');
+        }, 500);
     }
-    console.log(gameBoard);
-
 }
-
+// --------------------------------------------------------------------------------------------
