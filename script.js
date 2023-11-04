@@ -280,8 +280,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function addRandomNumber() {
     const emptyCells = [...document.querySelectorAll('.cell')].filter(cell => !cell.textContent.trim());
     const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-    let x = randomCell.attributes['data-x'].value;
-    let y = randomCell.attributes['data-y'].value;
+
+    let x = randomCell.attributes['data-x'].value; //column of 2d array
+    let y = randomCell.attributes['data-y'].value; //row of 2d array
 
     if (randomCell) {
         //auto generates 4 on moves that are multiples of 10
@@ -289,7 +290,7 @@ function addRandomNumber() {
             randomCell.textContent = '4';
             gameBoard[y][x] = 4;
         }
-        //for every other move it autogenerates 2
+        //for every other move that is not a multiple of 10, it genererates 2.
         else{
             randomCell.textContent = '2';
             gameBoard[y][x] = 2;
