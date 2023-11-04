@@ -92,6 +92,16 @@ h1{
     transition: 0.2s ease;
 }
 
+.play{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.howToPlayButton{
+    background-color: transparent;
+    border: none;
+}
+
 .new-game-btn:hover{
     background-color: #766d65;
     color: white;
