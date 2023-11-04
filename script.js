@@ -143,9 +143,11 @@ function updateCells(){
         for(let x = 0; x < gameBoard[y].length; x++) {
             const cell = cells[y * 4 + x];
             cell.textContent = gameBoard[y][x] || '';
+            
         }
     }
 }
+
 
 function updateCellStyles() {
     // update colors and styling
@@ -244,9 +246,15 @@ function checkGameLost(){
 }
 
 function logGame(){
-    // for debugging we log the board
-    const copiedBoard = JSON.parse(JSON.stringify(gameBoard));
-    console.log(copiedBoard);
+    // log game in order to put it into local storage
+    const boardInJsonFormat = JSON.stringify(gameBoard); //turn gameboard array to json string
+    localStorage.setItem('gameboard', boardInJsonFormat); //declare a key value pair
+
+    //if the game has started and the game has not ended
+    if(count > 0 && !checkGameLost()){
+        const copiedBoard = JSON.parse(localStorage.getItem('gameboard')); //get the key and parse its value and put it in a 2d array. Its like a dictionary
+        console.log(copiedBoard);
+    }
 }
 
 
