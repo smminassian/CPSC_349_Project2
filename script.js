@@ -348,6 +348,12 @@ function updateCellStyles() {
     });
 }
 
+function changeView() {
+    const view = document.getElementById("howToPlay"); //I target the how to play div by getting the id
+
+    view.scrollIntoView({ behavior: "smooth" }); //scroll into view is a built in function into javascript, behavior: smooth comes with it
+}
+
 function resetCellElement(y, x) {
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
     if (cell) {
