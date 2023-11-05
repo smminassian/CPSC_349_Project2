@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // event listener for keys
     document.addEventListener('keydown', (e) => {
+        e.preventDefault();
         let direction = null;
         switch(e.key) {
             case "ArrowLeft":
