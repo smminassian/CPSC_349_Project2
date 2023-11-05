@@ -235,6 +235,7 @@ function startNewGame(event){
     updateCells();
     addRandomNumber();   
     updateCellStyles();
+    saveGameState();
 
     // if try again button was pushed hide the message
     if(event.target.classList.value === "try-again-btn"){
